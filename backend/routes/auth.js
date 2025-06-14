@@ -44,12 +44,12 @@ router.post("/login", async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: false,    // MUST be false on HTTP localhost (no HTTPS)
-      sameSite: "lax",  // "lax" or "strict" works on localhost without HTTPS
+      sameSite: "None",  // "lax" or "strict" works on localhost without HTTPS
       maxAge: 24 * 60 * 60 * 1000,  // e.g. 1 day
       path: "/",
     })
       .status(200)
-      .json({ message: "Login successful" });
+      .json({ message: "Login successful", userId: user._id });
   } catch (err) {
     console.log(err)
     console.error("Signup error:", err);

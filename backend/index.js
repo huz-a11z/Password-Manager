@@ -16,19 +16,19 @@ const cookieParser = require("cookie-parser");
 dotenv.config();
 
 const app = express();
+app.use(cors({
+  origin: process.env.CORS_ORIGIN, // your frontend origin
+  credentials: true,
+}));
 app.use(express.json());
 app.use(cookieParser());
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.originalUrl}`);
   next();
 });
-app.use(cors({
-  origin: process.env.CORS_ORIGIN, // your frontend origin
-  credentials: true,
-}));
+
 app.use("/api", authRoutes);
 app.use("/api", passwordRoutes);
-app.use("/api/passwords", passwordRoutes);
 
 const PORT = process.env.PORT || 5000;
 
@@ -39,6 +39,11 @@ mongoose.connect(process.env.MONGO_URI, {
   console.log("MongoDB connected");
 }).catch((err) => {
   console.error("MongoDB connection error:", err);
+});
+
+// Health check route
+app.get("/", (req, res) => {
+  res.status(200).send("Nothing to see here. Server is running");
 });
 
 app.listen(PORT, () => {

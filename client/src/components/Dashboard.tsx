@@ -41,7 +41,7 @@ export default function Dashboard() {
 
   const fetchPasswords = async () => {
     try {
-      const response = await axios.post(`http://localhost:5000/api/passwords/`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/passwords/`, {
         _id
       }, {
         withCredentials: true,
@@ -110,7 +110,7 @@ export default function Dashboard() {
       console.log("check", form.site)
 
       if (editingId) {
-        await axios.put(`http://localhost:5000/api/passwords/update/${editingId}`, {
+        await axios.put(`${import.meta.env.VITE_API_URL}/api/passwords/update/${editingId}`, {
           site: form.site,
           username: form.username,
           encryptedPassword: encryptedPassword,
@@ -119,7 +119,7 @@ export default function Dashboard() {
         });
         setEditingId(null);
       } else {
-        await axios.post("http://localhost:5000/api/passwords/add", {
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/passwords/add`, {
           email,
           site: form.site,
           username: form.username,
@@ -151,7 +151,7 @@ export default function Dashboard() {
   const handleDelete = async (entryId: string | undefined) => {
     if (!entryId) return;
     try {
-      await axios.delete(`http://localhost:5000/api/passwords/delete/${entryId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/passwords/delete/${entryId}`, {
         withCredentials: true,
       });
       fetchPasswords();
@@ -163,7 +163,7 @@ export default function Dashboard() {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:5000/api/logout", null, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/logout`, null, {
         withCredentials: true,
       });
       navigate("/login");
