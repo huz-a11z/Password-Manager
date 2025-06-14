@@ -8,11 +8,6 @@ const authRoutes = require("./routes/auth");
 const passwordRoutes = require("./routes/passwords");
 const cookieParser = require("cookie-parser");
 
-
-
-
-
-
 dotenv.config();
 
 const app = express();
