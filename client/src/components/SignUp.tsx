@@ -42,7 +42,7 @@ export default function SignUp() {
       }
 
       console.log("Signup successful:", data);
-      navigate("/"); // or navigate to login if needed
+      navigate("/login"); // or navigate to login if needed
     } catch (error) {
       setError("Server error. Please try again later.");
       console.error("Signup error:", error);
