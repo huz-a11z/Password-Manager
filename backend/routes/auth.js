@@ -43,7 +43,7 @@ router.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,    // MUST be false on HTTP localhost (no HTTPS)
+      secure: true,   // MUST be false on HTTP localhost (no HTTPS)
       sameSite: "None",  // "lax" or "strict" works on localhost without HTTPS
       maxAge: 24 * 60 * 60 * 1000,  // e.g. 1 day
       path: "/",

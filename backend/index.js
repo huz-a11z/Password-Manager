@@ -12,7 +12,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-  origin: process.env.CORS_ORIGIN, // your frontend origin
+  origin: 'https://master.djl2ytyxwita9.amplifyapp.com/login', // your frontend origin
   credentials: true,
 }));
 app.use(express.json());
